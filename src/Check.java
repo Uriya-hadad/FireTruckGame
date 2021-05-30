@@ -1,9 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class a extends JPanel {
+public class Check extends JPanel {
     Rectangle a,b;
-    public a() {
+    public Check() {
         setPreferredSize(new Dimension(300,300));
 
     }

@@ -4,10 +4,10 @@ public class Splash extends JLabel {
     int x_splash, y_splash;
     Icon upIcon,downIcon,rightIcon,leftIcon;
     public Splash() {
-        upIcon = new ImageIcon("SplashUp.gif");
-        downIcon = new ImageIcon("SplashDown.gif");
-        rightIcon = new ImageIcon("SplashRight.gif");
-        leftIcon = new ImageIcon("SplashLeft.gif");
+        upIcon = new ImageIcon("Gifs/SplashUp.gif");
+        downIcon = new ImageIcon("Gifs/SplashDown.gif");
+        rightIcon = new ImageIcon("Gifs/SplashRight.gif");
+        leftIcon = new ImageIcon("Gifs/SplashLeft.gif");
         setVisible(false);
 
     }
@@ -18,19 +18,19 @@ public class Splash extends JLabel {
         switch (positionTruck) {
             case 1 -> {
                 setIcon(upIcon);
-                setBounds(x_splash, y_splash -DimensionGame.SplashSize, 57, 57);
+                setBounds(x_splash, y_splash - DataForGame.SplashSize, 57, 57);
             }
             case 2 -> {
                 setIcon(rightIcon);
-                setBounds(x_splash + DimensionGame.SplashSize, y_splash, 57, 57);
+                setBounds(x_splash + DataForGame.SplashSize, y_splash, 57, 57);
             }
             case 3 -> {
                 setIcon(downIcon);
-                setBounds(x_splash, y_splash + DimensionGame.SplashSize, 57, 57);
+                setBounds(x_splash, y_splash + DataForGame.SplashSize, 57, 57);
             }
             case 4 -> {
                 setIcon(leftIcon);
-                setBounds(x_splash -DimensionGame.SplashSize, y_splash, 57, 57);
+                setBounds(x_splash - DataForGame.SplashSize, y_splash, 57, 57);
             }
         }
     }

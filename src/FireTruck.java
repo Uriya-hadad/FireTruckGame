@@ -1,7 +1,6 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -9,20 +8,20 @@ public class FireTruck extends Component {
     private final File fileUp, fileDown, fileLeft, fileRight;
     private int position = 1;
     private Image image;
-    private int X_POSITION = DimensionGame.FrameWeight / 2;
-    private int Y_POSITION = DimensionGame.FrameHeight / 2;
+    private int X_POSITION = DataForGame.FrameWeight / 2;
+    private int Y_POSITION = DataForGame.FrameHeight / 2;
 
 
-    public FireTruck() {
-        fileUp = new File("fireTruckUp.png");
-        fileDown = new File("fireTruckDown.png");
-        fileLeft = new File("fireTruckLeft.png");
-        fileRight = new File("fireTruckRight.png");
+    public FireTruck(MainPanel parent) {
+        fileUp = new File("Pngs/fireTruckUp.png");
+        fileDown = new File("Pngs/fireTruckDown.png");
+        fileLeft = new File("Pngs/fireTruckLeft.png");
+        fileRight = new File("Pngs/fireTruckRight.png");
 
         try {
             image = ImageIO.read(fileUp);
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(parent,DataForGame.failMessage);
         }
 
     }
@@ -53,52 +52,41 @@ public class FireTruck extends Component {
 
     }
 
-    public void moveUp() {
+    public void moveUp() throws IOException {
         if (position != 1) {
-            try {
-                position = 1;
-                image = ImageIO.read(fileUp);
-            } catch (IOException e) {
-                System.out.println("file doesn't existed!");
-            }
+            position = 1;
+            image = ImageIO.read(fileUp);
         } else if (Y_POSITION >= 5) {
             setY_POSITION(getY_POSITION() - 5);
         }
     }
 
-    public void moveRight() {
-        if (position != 2)
-            try {
-                position = 2;
-                image = ImageIO.read(fileRight);
-            } catch (IOException e) {
-                System.out.println("file doesn't existed!");
-            }
-        else if (X_POSITION <= DimensionGame.FrameWeight - DimensionGame.ImageSize - 5) {
+    public void moveRight() throws IOException {
+        if (position != 2) {
+            position = 2;
+            image = ImageIO.read(fileRight);
+        }
+        else if (X_POSITION <= DataForGame.FrameWeight - DataForGame.ImageSize - 5) {
             setX_POSITION(getX_POSITION() + 5);
         }
     }
 
-    public void moveDown() {
+    public void moveDown() throws IOException {
         if (position != 3)
-            try {
+            {
                 position = 3;
                 image = ImageIO.read(fileDown);
-            } catch (IOException e) {
-                System.out.println("file doesn't existed!");
             }
-        else if (Y_POSITION <= DimensionGame.FrameHeight - DimensionGame.ImageSize - 5) {
+        else if (Y_POSITION <= DataForGame.FrameHeight - DataForGame.ImageSize - 5) {
             setY_POSITION(getY_POSITION() + 5);
         }
     }
 
-    public void moveLeft() {
+    public void moveLeft() throws IOException {
         if (position != 4)
-            try {
+           {
                 position = 4;
                 image = ImageIO.read(fileLeft);
-            } catch (IOException e) {
-                System.out.println("file doesn't existed!");
             }
         else if (X_POSITION >= 5) {
             setX_POSITION(getX_POSITION() - 5);
