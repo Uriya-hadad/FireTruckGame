@@ -1,20 +1,36 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 
-public class MainPanel extends JPanel {
+public class MainPanel extends JPanel implements ActionListener {
     FireTruck truck;
+    Splash splash;
+    Fire fire;
+    Timer timer;
+    private boolean canSpray = true;
+    private int score = 0;
+    private int time;
+    private boolean placeFire;
+    private int takeCurrentTime;
+    private int timeLeft=0;
 
     public MainPanel() {
         setLayout(null);
+        timer = new Timer(1000, this);
+        timer.start();
         setPreferredSize(new Dimension(DataForGame.FrameWeight,
                 DataForGame.FrameHeight));
         setFocusable(true);
         truck = new FireTruck(this);
+        fire = new Fire();
         add(truck);
+        add(fire);
+        replaceFire();
         this.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -24,36 +40,80 @@ public class MainPanel extends JPanel {
                         case KeyEvent.VK_LEFT -> truck.moveLeft();
                         case KeyEvent.VK_UP -> truck.moveUp();
                         case KeyEvent.VK_DOWN -> truck.moveDown();
-                        case KeyEvent.VK_SPACE -> splashDisplay();
+                        case KeyEvent.VK_SPACE -> {
+                            if (canSpray) splashDisplay();
+                        }
                     }
-                }catch (IOException err){
-                    JOptionPane.showMessageDialog(MainPanel.this,DataForGame.failMessage);
+                } catch (IOException err) {
+                    JOptionPane.showMessageDialog(MainPanel.this, DataForGame.failMessage);
                 }
                 repaint();
             }
         });
     }
 
+    private void replaceFire() {
+        fire.place();
+        placeFire = true;
+    }
+
     private void splashDisplay() {
-        Splash splash = new Splash();
+
+        splash = new Splash();
         splash.displayWater(truck.getX_POSITION(), truck.getY_POSITION(), truck.getPosition());
         add(splash);
         Thread thread = new Thread(() -> {
+            canSpray = false;
             splash.setVisible(true);
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            waterIntersectsFire();
             splash.setVisible(false);
             repaint();
+            canSpray = true;
         });
         thread.start();
+    }
+
+    private void waterIntersectsFire() {
+        if (splash.location.intersects(fire.location)) {
+            score += 1;
+            fire.setVisible(false);
+            timeLeft = 0;
+            replaceFire();
+            repaint();
+        } else
+            System.out.println("no!");
+
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
+        g.setFont(new Font("Arial", Font.BOLD, 17));
+        g.drawString("Your score is: " + score, DataForGame.FrameWeight / 2, 20);
+        g.drawString("your time left is: " + timeLeft, 10, 20);
         truck.paint(g);
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        time++;
+        if (placeFire && takeCurrentTime == -1)
+            takeCurrentTime = time;
+        else if (placeFire && time - takeCurrentTime == 5) {
+            fire.setVisible(true);
+            timeLeft = 10;
+            takeCurrentTime = -1;
+            placeFire = false;
+        } else if (fire.isVisible())
+            timeLeft--;
+        repaint();
+
+
+    }
+
 }

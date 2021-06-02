@@ -56,7 +56,7 @@ public class FireTruck extends Component {
         if (position != 1) {
             position = 1;
             image = ImageIO.read(fileUp);
-        } else if (Y_POSITION >= 5) {
+        } else if (Y_POSITION >= 25) {
             setY_POSITION(getY_POSITION() - 5);
         }
     }
