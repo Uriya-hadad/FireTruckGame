@@ -17,7 +17,7 @@ public class MainPanel extends JPanel implements ActionListener {
     private int time;
     private boolean placeFire;
     private int takeCurrentTime;
-    private int timeLeft=0;
+    private int timeLeft = 0;
 
     public MainPanel() {
         setLayout(null);
@@ -25,7 +25,6 @@ public class MainPanel extends JPanel implements ActionListener {
         timer.start();
         setPreferredSize(new Dimension(DataForGame.FrameWeight,
                 DataForGame.FrameHeight));
-        setFocusable(true);
         truck = new FireTruck(this);
         fire = new Fire();
         add(truck);
@@ -98,7 +97,7 @@ public class MainPanel extends JPanel implements ActionListener {
         g.drawString("your time left is: " + timeLeft, 10, 20);
         truck.paint(g);
     }
-
+//TODO fix the timeLEFT do gameover
     @Override
     public void actionPerformed(ActionEvent e) {
         time++;
