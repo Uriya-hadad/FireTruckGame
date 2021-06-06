@@ -101,13 +101,13 @@ public class MainPanel extends JPanel implements ActionListener {
     }
 
     @Override
-    public void paint(Graphics g) {
-        super.paint(g);
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
         g.setFont(new Font("Arial", Font.BOLD, 17));
         g.drawImage(backgroundImage, 0, 0, DataForGame.FrameWeight, DataForGame.FrameHeight, this);
         g.drawString("Your score is: " + score, DataForGame.FrameWeight / 2, 20);
         g.drawString("your time left is: " + timeLeft, 10, 20);
-        truck.paint(g);
+        truck.paintComponent(g);
     }
 //TODO fix the timeLEFT do gameover
     @Override

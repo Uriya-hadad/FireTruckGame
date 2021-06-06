@@ -46,7 +46,7 @@ public class FireTruck extends Component {
         return position;
     }
 
-    public void paint(Graphics g) {
+    public void paintComponent(Graphics g) {
         g.drawImage(image, X_POSITION, Y_POSITION, this);
 
 
