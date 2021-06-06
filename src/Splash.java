@@ -43,6 +43,10 @@ public class Splash extends JLabel {
         }
     }
 
+    public Rectangle getLocations() {
+        return location;
+    }
+
     @Override
     public void paint(Graphics g) {
         super.paint(g);

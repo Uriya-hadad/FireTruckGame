@@ -10,6 +10,7 @@ public class FireTruck extends Component {
     private Image image;
     private int X_POSITION = DataForGame.FrameWeight / 2;
     private int Y_POSITION = DataForGame.FrameHeight / 2;
+    private final Rectangle location;
 
 
     public FireTruck(MainPanel parent) {
@@ -17,7 +18,7 @@ public class FireTruck extends Component {
         fileDown = new File("Pngs/fireTruckDown.png");
         fileLeft = new File("Pngs/fireTruckLeft.png");
         fileRight = new File("Pngs/fireTruckRight.png");
-
+        location = new Rectangle();
         try {
             image = ImageIO.read(fileUp);
         } catch (Exception e) {
@@ -46,10 +47,13 @@ public class FireTruck extends Component {
         return position;
     }
 
+    public Rectangle getLocations() {
+        return location;
+    }
+
     public void paintComponent(Graphics g) {
         g.drawImage(image, X_POSITION, Y_POSITION, this);
-
-
+        location.setBounds(X_POSITION,Y_POSITION,57,57);
     }
 
     public void moveUp() throws IOException {

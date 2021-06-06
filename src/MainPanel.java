@@ -10,6 +10,7 @@ import java.io.IOException;
 
 
 public class MainPanel extends JPanel implements ActionListener {
+    Thread thread;
     FireTruck truck;
     Splash splash;
     Fire fire;
@@ -18,9 +19,9 @@ public class MainPanel extends JPanel implements ActionListener {
     private boolean canSpray = true;
     private int score = 0;
     private int time;
-    private boolean placeFire;
     private int takeCurrentTime;
-    private int timeLeft = 0;
+    private int timeLeft;
+    private boolean exit = false;
 
     public MainPanel() {
         setLayout(null);
@@ -32,7 +33,7 @@ public class MainPanel extends JPanel implements ActionListener {
         fire = new Fire();
         add(truck);
         add(fire);
-        replaceFire();
+        fire.place(truck);
         this.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -55,71 +56,76 @@ public class MainPanel extends JPanel implements ActionListener {
 
         {
             try {
-                backgroundImage = ImageIO.read(new File("Pngs/Grass image.jpg"));
+                backgroundImage = ImageIO.read(new File("Pngs/grass.png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    private void replaceFire() {
-        fire.place();
-        placeFire = true;
-    }
 
     private void splashDisplay() {
 
         splash = new Splash();
         splash.displayWater(truck.getX_POSITION(), truck.getY_POSITION(), truck.getPosition());
         add(splash);
-        Thread thread = new Thread(() -> {
-            canSpray = false;
-            splash.setVisible(true);
+        thread = new Thread(() -> {
+                canSpray = false;
+                splash.setVisible(true);
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            waterIntersectsFire();
-            splash.setVisible(false);
-            repaint();
+            if (!exit) {
+                waterIntersectsFire();
+            }
+                splash.setVisible(false);
+                repaint();
             canSpray = true;
         });
         thread.start();
     }
 
     private void waterIntersectsFire() {
-        if (splash.location.intersects(fire.location)) {
+        if (splash.getLocations().intersects(fire.getLocations())) {
             score += 1;
             fire.setVisible(false);
             timeLeft = 0;
-            replaceFire();
+            takeCurrentTime = -1;
+            fire.place(truck);
             repaint();
-        } else
-            System.out.println("no!");
-
+        }
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setFont(new Font("Arial", Font.BOLD, 17));
-        g.drawImage(backgroundImage, 0, 0, DataForGame.FrameWeight, DataForGame.FrameHeight, this);
-        g.drawString("Your score is: " + score, DataForGame.FrameWeight / 2, 20);
-        g.drawString("your time left is: " + timeLeft, 10, 20);
-        truck.paintComponent(g);
+        if (timeLeft == -1 || truck.getLocations().intersects(fire.getLocations())) {
+            removeAll();
+            exit = true;
+            g.clearRect(0, 0, getWidth(), getHeight());
+            g.setFont(new Font("arial", Font.BOLD, 30));
+            g.drawString("Game over", 50, 50);
+            repaint();
+            timer.stop();
+        } else {
+            g.setFont(new Font("Arial", Font.BOLD, 17));
+            g.drawImage(backgroundImage, 0, 25, DataForGame.FrameWeight, DataForGame.FrameHeight, this);
+            g.drawString("Your score is: " + score, DataForGame.FrameWeight / 2, 20);
+            g.drawString("your time left is: " + timeLeft, 10, 20);
+            truck.paintComponent(g);
+        }
     }
-//TODO fix the timeLEFT do gameover
+
     @Override
     public void actionPerformed(ActionEvent e) {
         time++;
-        if (placeFire && takeCurrentTime == -1)
+        if (takeCurrentTime == -1)
             takeCurrentTime = time;
-        else if (placeFire && time - takeCurrentTime == 5) {
+        else if (time - takeCurrentTime == 5) {
             fire.setVisible(true);
             timeLeft = 10;
-            takeCurrentTime = -1;
-            placeFire = false;
         } else if (fire.isVisible())
             timeLeft--;
         repaint();
