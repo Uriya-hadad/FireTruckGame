@@ -1,9 +1,11 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.IOException;
 
 
@@ -12,6 +14,7 @@ public class MainPanel extends JPanel implements ActionListener {
     Splash splash;
     Fire fire;
     Timer timer;
+    Image backgroundImage;
     private boolean canSpray = true;
     private int score = 0;
     private int time;
@@ -49,6 +52,14 @@ public class MainPanel extends JPanel implements ActionListener {
                 repaint();
             }
         });
+
+        {
+            try {
+                backgroundImage = ImageIO.read(new File("Pngs/Grass image.jpg"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void replaceFire() {
@@ -93,6 +104,7 @@ public class MainPanel extends JPanel implements ActionListener {
     public void paint(Graphics g) {
         super.paint(g);
         g.setFont(new Font("Arial", Font.BOLD, 17));
+        g.drawImage(backgroundImage, 0, 0, DataForGame.FrameWeight, DataForGame.FrameHeight, this);
         g.drawString("Your score is: " + score, DataForGame.FrameWeight / 2, 20);
         g.drawString("your time left is: " + timeLeft, 10, 20);
         truck.paint(g);

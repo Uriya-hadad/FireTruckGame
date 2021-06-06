@@ -45,17 +45,17 @@ public class LoginScreen extends JPanel {
         }
 
         instructions = new JButton("Instructions");
-        instructions.setBounds(0, 0, 120, 40);
+        instructions.setBounds(0, 0, 140, 40);
         instructions.setFont(instFont);
         instructions.setBackground(Color.CYAN);
-        instructions.setFocusCycleRoot(true);
+
 
 
         play = new JButton("Play");
         play.setFont(playFont);
         play.setBounds((DataForGame.FrameWeight - 110) / 2, (DataForGame.FrameHeight / 6) * 4, 120, 70);
         play.setBackground(Color.RED);
-        play.setFocusCycleRoot(true);
+
 //        play.addActionListener(e->{
 //            removeAll();
 //            setVisible(false);
@@ -65,7 +65,7 @@ public class LoginScreen extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(backgroundImage, 0, 0, DataForGame.FrameWeight, DataForGame.FrameHeight, null);
+        g.drawImage(backgroundImage, 0, 0, DataForGame.FrameWeight, DataForGame.FrameHeight, this);
     }
 }
 
