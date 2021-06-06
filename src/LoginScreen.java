@@ -1,6 +1,5 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.xml.crypto.Data;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -18,9 +17,15 @@ public class LoginScreen extends JPanel {
         panelInit();
         add(instructions);
         add(play);
-        instructions.addActionListener((e) -> {
-            JOptionPane.showMessageDialog(this, "Instructions:\n Find the fire and put it out as quickly as possible\n Use the ARROW KEYS to move in all directions and the SPACEBAR to spray water.");
-        });
+        instructions.addActionListener((e) -> JOptionPane.showMessageDialog(this, """
+                                  |~~~~~~~~~~~~|
+                                  |  Instructions:   |
+                                  |~~~~~~~~~~~~|
+            Your mission is:
+            Find the fire and put it out as quickly as possible!
+            Keys:
+            Use the ARROW KEYS to move left right up and down.
+            Use the SPACEBAR to spray water and put out the fire."""));
     }
 
 

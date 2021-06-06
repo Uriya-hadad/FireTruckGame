@@ -18,6 +18,12 @@ public class Game extends JFrame implements ActionListener {
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
+
+//        loginScreen.play.addActionListener((e) -> {
+//            loginScreen.setVisible(false);
+//            remove(loginScreen);
+//            add(mainPanel);
+//            mainPanel.requestFocusInWindow();});
     }
 
     @Override
