@@ -5,11 +5,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class LoginScreen extends JPanel {
-
-    public JButton getPlay() {
-        return play;
-    }
-
     private Image backgroundImage;
     private JButton instructions, play;
 
@@ -23,9 +18,10 @@ public class LoginScreen extends JPanel {
                                   |~~~~~~~~~~~~|
             Your mission is:
             Find the fire and put it out as quickly as possible!
-            Keys:
-            Use the ARROW KEYS to move left right up and down.
-            Use the SPACEBAR to spray water and put out the fire."""));
+            Don't drive over the fire!
+            How to play:
+            Use the arrow keys to move left right up and down.
+            Use the space bar to spray water and put out the fire."""));
     }
 
 
@@ -49,17 +45,13 @@ public class LoginScreen extends JPanel {
         instructions.setFont(instFont);
         instructions.setBackground(Color.CYAN);
 
-
-
         play = new JButton("Play");
         play.setFont(playFont);
         play.setBounds((DataForGame.FrameWeight - 110) / 2, (DataForGame.FrameHeight / 6) * 4, 120, 70);
         play.setBackground(Color.RED);
-
-//        play.addActionListener(e->{
-//            removeAll();
-//            setVisible(false);
-//        });
+    }
+    public JButton getPlay() {
+        return play;
     }
 
     @Override

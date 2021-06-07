@@ -1,6 +1,4 @@
 import javax.swing.*;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,6 +19,10 @@ public class Game extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setVisible(true);
 }
+
+    public static void main(String[] args) {
+        new Game();
+    }
 
     @Override
     public void paint(Graphics g) {

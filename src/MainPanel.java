@@ -10,12 +10,11 @@ import java.io.IOException;
 
 
 public class MainPanel extends JPanel implements ActionListener {
-    Thread thread;
-    FireTruck truck;
-    Splash splash;
-    Fire fire;
-    Timer timer;
-    Image backgroundImage,cryingFace;
+    private final FireTruck truck;
+    private Splash splash;
+    private final Fire fire;
+    private final Timer timer;
+    private Image backgroundImage, cryingFace;
     private boolean canSpray = true;
     private int score = 0;
     private int time;
@@ -33,7 +32,6 @@ public class MainPanel extends JPanel implements ActionListener {
         fire = new Fire();
         add(truck);
         add(fire);
-        fire.place(truck);
         this.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -53,21 +51,13 @@ public class MainPanel extends JPanel implements ActionListener {
                 repaint();
             }
         });
-
-        {
-            try {
-                backgroundImage = ImageIO.read(new File("Pngs/grass.png"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    {
         try {
-            cryingFace = ImageIO.read(new File("Pngs/crying-face.png"));
+            backgroundImage = ImageIO.read(new File("Pngs/grass.png"));
+            cryingFace = ImageIO.read(new File("Pngs/sadFace.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     private void splashDisplay() {
@@ -75,9 +65,9 @@ public class MainPanel extends JPanel implements ActionListener {
         splash = new Splash();
         splash.displayWater(truck.getX_POSITION(), truck.getY_POSITION(), truck.getPosition());
         add(splash);
-        thread = new Thread(() -> {
-                canSpray = false;
-                splash.setVisible(true);
+        Thread thread = new Thread(() -> {
+            canSpray = false;
+            splash.setVisible(true);
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
@@ -86,8 +76,8 @@ public class MainPanel extends JPanel implements ActionListener {
             if (!exit) {
                 waterIntersectsFire();
             }
-                splash.setVisible(false);
-                repaint();
+            splash.setVisible(false);
+            repaint();
             canSpray = true;
         });
         thread.start();
@@ -99,7 +89,6 @@ public class MainPanel extends JPanel implements ActionListener {
             fire.setVisible(false);
             timeLeft = 0;
             takeCurrentTime = -1;
-            fire.place(truck);
             repaint();
         }
     }
@@ -107,23 +96,22 @@ public class MainPanel extends JPanel implements ActionListener {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (timeLeft == -1 || truck.getLocations().intersects(fire.getLocations())) {
+        if (timeLeft == -1 ||
+                (truck.getLocations().intersects(fire.getLocations()) && fire.isVisible())) {
             removeAll();
             exit = true;
             g.clearRect(0, 0, getWidth(), getHeight());
             g.setColor(Color.MAGENTA);
-            g.fillRect(0,0,DataForGame.FrameWeight, DataForGame.FrameHeight);
-            g.drawImage(cryingFace,(DataForGame.FrameWeight/2)-50,30,this);
-            g.setFont(new Font("arial", Font.BOLD+ Font.ITALIC, 65));
+            g.fillRect(0, 0, DataForGame.FrameWeight, DataForGame.FrameHeight);
+            g.drawImage(cryingFace, (DataForGame.FrameWeight / 2) - 50, 30, 120, 120, this);
+            g.setFont(new Font("arial", Font.BOLD + Font.ITALIC, 65));
             g.setColor(Color.RED);
-            g.drawString("Game over", 230, (DataForGame.FrameHeight/2) - 30);
+            g.drawString("Game over", 230, (DataForGame.FrameHeight / 2) - 30);
             g.setColor(Color.BLUE);
             g.setFont(new Font("arial", Font.BOLD, 30));
-            g.drawString("Your score is: " + score,(DataForGame.FrameWeight/2)-110, (DataForGame.FrameHeight/2) + 20 );
+            g.drawString("Your score is: " + score, (DataForGame.FrameWeight / 2) - 110, (DataForGame.FrameHeight / 2) + 20);
             g.setFont(new Font("arial", Font.ITALIC, 25));
-            g.drawString("Did you enjoy the game?  Feel free to play again",150, (DataForGame.FrameHeight/2)+ 120 );
-
-
+            g.drawString("Did you enjoy the game?  Feel free to play again!", 150, (DataForGame.FrameHeight / 2) + 120);
             repaint();
             timer.stop();
         } else {
@@ -141,7 +129,7 @@ public class MainPanel extends JPanel implements ActionListener {
         if (takeCurrentTime == -1)
             takeCurrentTime = time;
         else if (time - takeCurrentTime == 5) {
-            fire.setVisible(true);
+            fire.place(truck);
             timeLeft = 10;
         } else if (fire.isVisible())
             timeLeft--;

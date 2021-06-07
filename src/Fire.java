@@ -3,23 +3,24 @@ import java.awt.*;
 import java.util.Random;
 
 public class Fire extends JLabel {
-    int x_position, y_position;
-    private Rectangle location;
+    private final Rectangle location;
 
     public Fire() {
+        location = new Rectangle();
         Icon upIcon = new ImageIcon("Gifs/fire.gif");
         setIcon(upIcon);
         setVisible(false);
     }
     void place(FireTruck truck){
         Random random = new Random();
-        x_position = random.nextInt(DataForGame.FrameWeight - 60);
-        y_position = random.nextInt(DataForGame.FrameHeight - 80)+20;
-        location = new Rectangle();
+        int x_position = random.nextInt(DataForGame.FrameWeight - 60);
+        int y_position = random.nextInt(DataForGame.FrameHeight - 80) + 20;
         setBounds(x_position, y_position, 60, 60);
         location.setBounds(x_position + 10, y_position + 10, 40, 50);
-        if (location.intersects(truck.getLocations()))
+        if (location.intersects(truck.getLocations())) {
             place(truck);
+        }
+        setVisible(true);
     }
 
     public Rectangle getLocations() {
