@@ -105,8 +105,13 @@ public class MainPanel extends JPanel implements ActionListener {
             removeAll();
             exit = true;
             g.clearRect(0, 0, getWidth(), getHeight());
-            g.setFont(new Font("arial", Font.BOLD, 30));
-            g.drawString("Game over", 50, 50);
+            g.setColor(Color.CYAN);
+            g.fillRect(0,0,DataForGame.FrameWeight, DataForGame.FrameHeight);
+            g.setFont(new Font("arial", Font.BOLD, 50));
+            g.setColor(Color.RED);
+            g.drawString("Game over", (DataForGame.FrameWeight/2)-120, (DataForGame.FrameHeight/2) - 50);
+            g.setFont(new Font("arial", Font.BOLD, 25));
+            g.drawString("Your score is: " + score,(DataForGame.FrameWeight/2)-80, DataForGame.FrameHeight/2 );
             repaint();
             timer.stop();
         } else {
