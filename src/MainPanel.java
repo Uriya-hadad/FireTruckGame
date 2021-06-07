@@ -15,7 +15,7 @@ public class MainPanel extends JPanel implements ActionListener {
     Splash splash;
     Fire fire;
     Timer timer;
-    Image backgroundImage;
+    Image backgroundImage,cryingFace;
     private boolean canSpray = true;
     private int score = 0;
     private int time;
@@ -62,7 +62,13 @@ public class MainPanel extends JPanel implements ActionListener {
             }
         }
     }
-
+    {
+        try {
+            cryingFace = ImageIO.read(new File("Pngs/crying-face.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void splashDisplay() {
 
@@ -105,13 +111,19 @@ public class MainPanel extends JPanel implements ActionListener {
             removeAll();
             exit = true;
             g.clearRect(0, 0, getWidth(), getHeight());
-            g.setColor(Color.CYAN);
+            g.setColor(Color.MAGENTA);
             g.fillRect(0,0,DataForGame.FrameWeight, DataForGame.FrameHeight);
-            g.setFont(new Font("arial", Font.BOLD, 50));
+            g.drawImage(cryingFace,(DataForGame.FrameWeight/2)-50,30,this);
+            g.setFont(new Font("arial", Font.BOLD, 65));
             g.setColor(Color.RED);
-            g.drawString("Game over", (DataForGame.FrameWeight/2)-120, (DataForGame.FrameHeight/2) - 50);
-            g.setFont(new Font("arial", Font.BOLD, 25));
-            g.drawString("Your score is: " + score,(DataForGame.FrameWeight/2)-80, DataForGame.FrameHeight/2 );
+            g.drawString("Game over", (DataForGame.FrameWeight/2)-150, (DataForGame.FrameHeight/2) - 30);
+            g.setFont(new Font("arial", Font.BOLD, 30));
+            g.drawString("Your score is: " + score,(DataForGame.FrameWeight/2)-110, (DataForGame.FrameHeight/2) + 20 );
+            g.setFont(new Font("arial", Font.ITALIC, 25));
+            g.setColor(Color.BLUE);
+            g.drawString("Did you enjoy the game?  Feel free to play again",150, (DataForGame.FrameHeight/2)+ 120 );
+           // g.drawString("Feel free to play again ",(DataForGame.FrameWeight/2)-150, (DataForGame.FrameHeight/2)+ 150 );
+
             repaint();
             timer.stop();
         } else {
