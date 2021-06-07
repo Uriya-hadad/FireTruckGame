@@ -114,15 +114,15 @@ public class MainPanel extends JPanel implements ActionListener {
             g.setColor(Color.MAGENTA);
             g.fillRect(0,0,DataForGame.FrameWeight, DataForGame.FrameHeight);
             g.drawImage(cryingFace,(DataForGame.FrameWeight/2)-50,30,this);
-            g.setFont(new Font("arial", Font.BOLD, 65));
+            g.setFont(new Font("arial", Font.BOLD+ Font.ITALIC, 65));
             g.setColor(Color.RED);
-            g.drawString("Game over", (DataForGame.FrameWeight/2)-150, (DataForGame.FrameHeight/2) - 30);
+            g.drawString("Game over", 230, (DataForGame.FrameHeight/2) - 30);
+            g.setColor(Color.BLUE);
             g.setFont(new Font("arial", Font.BOLD, 30));
             g.drawString("Your score is: " + score,(DataForGame.FrameWeight/2)-110, (DataForGame.FrameHeight/2) + 20 );
             g.setFont(new Font("arial", Font.ITALIC, 25));
-            g.setColor(Color.BLUE);
             g.drawString("Did you enjoy the game?  Feel free to play again",150, (DataForGame.FrameHeight/2)+ 120 );
-           // g.drawString("Feel free to play again ",(DataForGame.FrameWeight/2)-150, (DataForGame.FrameHeight/2)+ 150 );
+
 
             repaint();
             timer.stop();
