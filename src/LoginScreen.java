@@ -46,6 +46,7 @@ public class LoginScreen extends JPanel {
         instructions.setBackground(Color.CYAN);
 
         play = new JButton("Play");
+        play.setForeground(Color.WHITE);
         play.setFont(playFont);
         play.setBounds((DataForGame.FrameWeight - 110) / 2, (DataForGame.FrameHeight / 6) * 4, 120, 70);
         play.setBackground(Color.RED);
