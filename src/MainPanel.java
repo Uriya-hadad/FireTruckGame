@@ -21,14 +21,16 @@ public class MainPanel extends JPanel implements ActionListener {
     private int takeCurrentTime;
     private int timeLeft;
     private boolean exit = false;
+    private final boolean darkMode;
 
-    public MainPanel() {
+    public MainPanel(boolean darkMode) {
+        this.darkMode = darkMode;
         setLayout(null);
         timer = new Timer(1000, this);
         timer.start();
         setPreferredSize(new Dimension(DataForGame.FrameWeight,
                 DataForGame.FrameHeight));
-        truck = new FireTruck(this);
+        truck = new FireTruck(this,darkMode);
         fire = new Fire();
         add(truck);
         add(fire);
@@ -52,7 +54,11 @@ public class MainPanel extends JPanel implements ActionListener {
             }
         });
         try {
-            backgroundImage = ImageIO.read(new File("Pngs/grass.png"));
+            if (darkMode) {
+                backgroundImage = ImageIO.read(new File("Pngs/grassNight.png"));
+            } else {
+                backgroundImage = ImageIO.read(new File("Pngs/grassDay.png"));
+            }
             cryingFace = ImageIO.read(new File("Pngs/sadFace.png"));
         } catch (IOException e) {
             e.printStackTrace();
@@ -115,7 +121,10 @@ public class MainPanel extends JPanel implements ActionListener {
             repaint();
             timer.stop();
         } else {
-            g.setFont(new Font("Arial", Font.BOLD, 17));
+            g.setColor(new Color(49, 127, 49));
+            g.fillRect(0,0,DataForGame.FrameWeight,25);
+            g.setColor(Color.BLACK);
+            g.setFont(new Font("MV Boli", Font.BOLD, 17));
             g.drawImage(backgroundImage, 0, 25, DataForGame.FrameWeight, DataForGame.FrameHeight, this);
             g.drawString("Your score is: " + score, DataForGame.FrameWeight / 2, 20);
             g.drawString("your time left is: " + timeLeft, 10, 20);
@@ -129,7 +138,7 @@ public class MainPanel extends JPanel implements ActionListener {
         if (takeCurrentTime == -1)
             takeCurrentTime = time;
         else if (time - takeCurrentTime == 5) {
-            fire.place(truck);
+            fire.place(truck,this);
             timeLeft = 10;
         } else if (fire.isVisible())
             timeLeft--;

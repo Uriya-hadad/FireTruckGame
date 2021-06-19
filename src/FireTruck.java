@@ -13,16 +13,17 @@ public class FireTruck extends Component {
     private final Rectangle location;
 
 
-    public FireTruck(MainPanel parent) {
-        fileUp = new File("Pngs/fireTruckUp.png");
-        fileDown = new File("Pngs/fireTruckDown.png");
-        fileLeft = new File("Pngs/fireTruckLeft.png");
-        fileRight = new File("Pngs/fireTruckRight.png");
+    public FireTruck(MainPanel parent, Boolean isDarkMode) {
+        String source = ((isDarkMode) ? "TruckNight" : "TruckDay");
+        fileUp = new File("Pngs/" + source + "/fireTruckUp.png");
+        fileDown = new File("Pngs/" + source + "/fireTruckDown.png");
+        fileLeft = new File("Pngs/" + source + "/fireTruckLeft.png");
+        fileRight = new File("Pngs/" + source + "/fireTruckRight.png");
         location = new Rectangle();
         try {
             image = ImageIO.read(fileUp);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(parent,DataForGame.failMessage);
+            JOptionPane.showMessageDialog(parent, DataForGame.failMessage);
         }
 
     }
@@ -53,7 +54,7 @@ public class FireTruck extends Component {
 
     public void paintComponent(Graphics g) {
         g.drawImage(image, X_POSITION, Y_POSITION, this);
-        location.setBounds(X_POSITION,Y_POSITION,57,57);
+        location.setBounds(X_POSITION, Y_POSITION, 57, 57);
     }
 
     public void moveUp() throws IOException {
@@ -69,30 +70,25 @@ public class FireTruck extends Component {
         if (position != 2) {
             position = 2;
             image = ImageIO.read(fileRight);
-        }
-        else if (X_POSITION <= DataForGame.FrameWeight - DataForGame.ImageSize - 5) {
+        } else if (X_POSITION <= DataForGame.FrameWeight - DataForGame.ImageSize - 5) {
             setX_POSITION(getX_POSITION() + 5);
         }
     }
 
     public void moveDown() throws IOException {
-        if (position != 3)
-            {
-                position = 3;
-                image = ImageIO.read(fileDown);
-            }
-        else if (Y_POSITION <= DataForGame.FrameHeight - DataForGame.ImageSize - 5) {
+        if (position != 3) {
+            position = 3;
+            image = ImageIO.read(fileDown);
+        } else if (Y_POSITION <= DataForGame.FrameHeight - DataForGame.ImageSize - 5) {
             setY_POSITION(getY_POSITION() + 5);
         }
     }
 
     public void moveLeft() throws IOException {
-        if (position != 4)
-           {
-                position = 4;
-                image = ImageIO.read(fileLeft);
-            }
-        else if (X_POSITION >= 5) {
+        if (position != 4) {
+            position = 4;
+            image = ImageIO.read(fileLeft);
+        } else if (X_POSITION >= 5) {
             setX_POSITION(getX_POSITION() - 5);
         }
     }

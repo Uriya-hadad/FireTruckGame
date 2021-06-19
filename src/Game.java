@@ -31,8 +31,8 @@ public class Game extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        MainPanel panel = new MainPanel();
         remove(firstScreen);
+        MainPanel panel = new MainPanel(firstScreen.isDarkMode());
         add(panel);
         panel.requestFocus();
         getContentPane().invalidate();
