@@ -1,4 +1,5 @@
 import javax.imageio.ImageIO;
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
@@ -6,8 +7,12 @@ import java.io.IOException;
 
 public class LoginScreen extends JPanel {
     private Image backgroundImage;
-    private JButton instructions, play, darkMode;
-    private boolean isDarkMode = false;
+    private JButton instructions, play, audio, darkMode;
+    private boolean audioOn = true, isDarkMode = false;
+    private Icon img;
+    private Clip clip;
+    private final String soundName = "audio/sami the fireman song.wav";
+    private AudioInputStream audioInputStream;
 
     public LoginScreen() {
         panelInit();
@@ -15,13 +20,19 @@ public class LoginScreen extends JPanel {
         add(play);
         add(darkMode);
         instructions.addActionListener((e) -> JOptionPane.showMessageDialog(this, """
-                                      |~~~~~~~~~~~~|
-                                      |  Instructions:   |
-                                      |~~~~~~~~~~~~|
-                Your mission is:
+                                                                  |~~~~~~~~~~~~|
+                                                                  |  Instructions    |
+                                                                  |~~~~~~~~~~~~|
+                You can switch between day and night mode by clicking the "Night Time" button.
+                You can turn on and turn off the music by pressing the button with the icon.
+                                         
+                                         Your mission is:
+                                         
                 Find the fire and put it out as quickly as possible!
                 Don't drive over the fire!
-                How to play:
+                                           
+                                           How to play:
+                                           
                 Use the arrow keys to move left right up and down.
                 Use the space bar to spray water and put out the fire."""));
     }
@@ -35,21 +46,29 @@ public class LoginScreen extends JPanel {
         Font playFont = new Font("Ariel", Font.BOLD, 40);
         Font instFont = new Font("Ariel", Font.BOLD, 15);
 
+        audio = new JButton();
+        audio.setBounds(0,80,53,47);
+
         {
             try {
                 backgroundImage = ImageIO.read(new File("Pngs/backGround.jpg"));
-            } catch (IOException e) {
+
+                audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
+                clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                clip.start();
+            }catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
                 e.printStackTrace();
             }
         }
 
         instructions = new JButton("Instructions");
-        instructions.setBounds(0, 0, 140, 40);
+        instructions.setBounds(0, 0, 125, 30);
         instructions.setFont(instFont);
         instructions.setBackground(Color.CYAN);
 
         darkMode = new JButton("Night Time Off");
-        darkMode.setBounds(0, 40, 140, 40);
+        darkMode.setBounds(127, 0, 125, 30);
         darkMode.addActionListener(e -> {
             if (!isDarkMode) {
                 darkMode.setBackground(new Color(161, 44, 118));
@@ -65,6 +84,30 @@ public class LoginScreen extends JPanel {
         play.setFont(playFont);
         play.setBounds((DataForGame.FrameWeight - 110) / 2, (DataForGame.FrameHeight / 6) * 4, 120, 70);
         play.setBackground(Color.RED);
+
+        img = new ImageIcon("Pngs/audio on.png");
+        audio = new JButton(img);
+        audio.setBounds(254,0,30,30);
+        add(audio);
+        audio.addActionListener((e) -> {
+            audioOn = !audioOn;
+            if (audioOn){
+                img = new ImageIcon("Pngs/audio on.png");
+                audio.setIcon(img);
+                try {
+                    audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
+                    clip = AudioSystem.getClip();
+                    clip.open(audioInputStream);
+                    clip.start();
+                } catch (UnsupportedAudioFileException | LineUnavailableException | IOException unsupportedAudioFileException) {
+                    unsupportedAudioFileException.printStackTrace();
+                }
+            }else{
+                img = new ImageIcon("Pngs/audio off.png");
+                audio.setIcon(img);
+                clip.close();
+            }
+        });
     }
 
     public JButton getPlay() {
