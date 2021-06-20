@@ -116,7 +116,7 @@ public class MainPanel extends JPanel implements ActionListener {
             g.setColor(Color.BLUE);
             g.setFont(new Font("arial", Font.BOLD, 30));
             g.drawString("Your score is: " + score, (DataForGame.FrameWeight / 2) - 110, (DataForGame.FrameHeight / 2) + 20);
-            g.setFont(new Font("arial", Font.ITALIC, 25));
+            g.setFont(new Font("Ink Free", Font.ITALIC, 25));
             g.drawString("Did you enjoy the game?  Feel free to play again!", 150, (DataForGame.FrameHeight / 2) + 120);
             repaint();
             timer.stop();
