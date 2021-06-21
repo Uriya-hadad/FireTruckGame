@@ -36,21 +36,24 @@ public class Driver {
         userList.setListData(userNamesList);
         create.addActionListener(e1 -> {
             String userName = JOptionPane.showInputDialog(frame, "Enter a user name:");
-            FileWriter writer;
-            try {
-                writer = new FileWriter(usersFile, true);
-                writer.write(userName);
-                writer.write("\n");
-                writer.flush();
-                updateList(userArrayList, userList, userName);
-            } catch (IOException exception) {
-                exception.printStackTrace();
+            if (userName != null && userName.length() > 0) {
+
+                FileWriter writer;
+                try {
+                    writer = new FileWriter(usersFile, true);
+                    writer.write(userName);
+                    writer.write("\n");
+                    writer.flush();
+                    updateList(userArrayList, userList, userName);
+                } catch (IOException exception) {
+                    exception.printStackTrace();
+                }
             }
         });
         select.addActionListener(e1 -> {
             if (userList.isSelectionEmpty()) {
-                JOptionPane.showMessageDialog(frame,"choose an user or create a new one!");
-            }else{
+                JOptionPane.showMessageDialog(frame, "choose an user or create a new one!");
+            } else {
                 frame.dispose();
                 new Game(userList.getSelectedValue());
             }
