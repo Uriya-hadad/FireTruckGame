@@ -52,42 +52,60 @@ public class FireTruck extends Component {
         return location;
     }
 
+    private void showFailMessage(){JOptionPane.showMessageDialog(null, DataForGame.failMessage);}
+
     public void paintComponent(Graphics g) {
         g.drawImage(image, X_POSITION, Y_POSITION, this);
         location.setBounds(X_POSITION, Y_POSITION, 57, 57);
     }
 
-    public void moveUp() throws IOException {
+    public void moveUp() {
         if (position != 1) {
             position = 1;
-            image = ImageIO.read(fileUp);
+            try {
+                image = ImageIO.read(fileUp);
+            } catch (IOException exception) {
+                showFailMessage();
+            }
         } else if (Y_POSITION >= 25) {
             setY_POSITION(getY_POSITION() - 5);
         }
     }
 
-    public void moveRight() throws IOException {
+    public void moveRight() {
         if (position != 2) {
             position = 2;
-            image = ImageIO.read(fileRight);
+            try {
+                image = ImageIO.read(fileRight);
+            } catch (IOException exception) {
+                showFailMessage();
+            }
         } else if (X_POSITION <= DataForGame.FrameWeight - DataForGame.ImageSize - 5) {
             setX_POSITION(getX_POSITION() + 5);
         }
     }
 
-    public void moveDown() throws IOException {
+    public void moveDown() {
         if (position != 3) {
             position = 3;
-            image = ImageIO.read(fileDown);
+            try {
+                image = ImageIO.read(fileDown);
+            } catch (IOException exception) {
+                showFailMessage();
+            }
         } else if (Y_POSITION <= DataForGame.FrameHeight - DataForGame.ImageSize - 5) {
             setY_POSITION(getY_POSITION() + 5);
         }
     }
 
-    public void moveLeft() throws IOException {
+    public void moveLeft() {
         if (position != 4) {
             position = 4;
-            image = ImageIO.read(fileLeft);
+            try {
+                image = ImageIO.read(fileLeft);
+            } catch (IOException exception) {
+                showFailMessage();
+            }
         } else if (X_POSITION >= 5) {
             setX_POSITION(getX_POSITION() - 5);
         }

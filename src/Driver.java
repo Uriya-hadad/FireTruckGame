@@ -37,7 +37,6 @@ public class Driver {
         create.addActionListener(e1 -> {
             String userName = JOptionPane.showInputDialog(frame, "Enter a user name:");
             if (userName != null && userName.length() > 0) {
-
                 FileWriter writer;
                 try {
                     writer = new FileWriter(usersFile, true);

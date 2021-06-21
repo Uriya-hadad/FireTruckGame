@@ -21,24 +21,11 @@ public class LoginScreen extends JPanel {
         add(instructions);
         add(play);
         add(darkMode);
-        instructions.addActionListener((e) -> JOptionPane.showMessageDialog(this, """
-                                                                  |~~~~~~~~~~~~|
-                                                                  |  Instructions    |
-                                                                  |~~~~~~~~~~~~|
-                You can switch between day and night mode by clicking the "Night Time" button.
-                You can turn on and turn off the music by pressing the button with the icon.
-                                         
-                                         Your mission is:
-                                         
-                Find the fire and put it out as quickly as possible!
-                Don't drive over the fire!
-                                           
-                                           How to play:
-                                           
-                Use the arrow keys to move left right up and down.
-                Use the space bar to spray water and put out the fire."""));
+        instructions.addActionListener((e) -> showInstruction());
 
     }
+
+
 
 
     public void panelInit() {
@@ -129,6 +116,24 @@ public class LoginScreen extends JPanel {
         super.paintComponent(g);
         g.drawImage(backgroundImage, 0, 0, DataForGame.FrameWeight, DataForGame.FrameHeight, this);
 
+    }
+    static public void showInstruction() {
+        JOptionPane.showMessageDialog(null, """
+                                                                  |~~~~~~~~~~~~|
+                                                                  |  Instructions    |
+                                                                  |~~~~~~~~~~~~|
+                You can switch between day and night mode by clicking the "Night Time" button.
+                You can turn on and turn off the music by pressing the button with the icon.
+                                         
+                                         Your mission is:
+                                         
+                Find the fire and put it out as quickly as possible!
+                Don't drive over the fire!
+                                           
+                                           How to play:
+                                           
+                Use the arrow keys to move left right up and down.
+                Use the space bar to spray water and put out the fire.""");
     }
 }
 
