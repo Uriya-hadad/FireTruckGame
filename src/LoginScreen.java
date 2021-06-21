@@ -34,7 +34,8 @@ public class LoginScreen extends JPanel {
                 Don't drive over the fire!
                                            
                                            How to play:
-                                           
+               
+                At each stage of the game to get the instructions again press F1.                           
                 Use the arrow keys to move left right up and down.
                 Use the space bar to spray water and put out the fire."""));
 
