@@ -37,7 +37,11 @@ public class MainPanel extends JPanel implements ActionListener {
                     case KeyEvent.VK_LEFT -> truck.moveLeft();
                     case KeyEvent.VK_UP -> truck.moveUp();
                     case KeyEvent.VK_DOWN -> truck.moveDown();
-                    case KeyEvent.VK_F1 -> LoginScreen.showInstruction();
+                    case KeyEvent.VK_F1 -> {
+                        timer.stop();
+                        LoginScreen.showInstruction();
+                        timer.start();
+                    }
                     case KeyEvent.VK_SPACE -> {
                         if (canSpray) splashDisplay();
                     }

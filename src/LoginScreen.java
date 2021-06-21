@@ -122,6 +122,7 @@ public class LoginScreen extends JPanel {
                                                                   |~~~~~~~~~~~~|
                                                                   |  Instructions    |
                                                                   |~~~~~~~~~~~~|
+                During the game you can watch this message again by pressing F1.
                 You can switch between day and night mode by clicking the "Night Time" button.
                 You can turn on and turn off the music by pressing the button with the icon.
                                          
