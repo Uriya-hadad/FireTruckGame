@@ -55,12 +55,10 @@ public class MainPanel extends JPanel implements ActionListener {
                         case KeyEvent.VK_UP -> truck.moveUp();
                         case KeyEvent.VK_DOWN -> truck.moveDown();
                         case KeyEvent.VK_F1 -> JOptionPane.showMessageDialog(null, """
-                                                              |~~~~~~~~~~~~|
-                                                              |  Instructions    |
-                                                              |~~~~~~~~~~~~|
-            You can switch between day and night mode by clicking the "Night Time" button.
-            You can turn on and turn off the music by pressing the button with the icon.
-                                     
+                                        |~~~~~~~~~~~~|
+                                        |  Instructions    |
+                                        |~~~~~~~~~~~~|
+                
                                      Your mission is:
                                      
             Find the fire and put it out as quickly as possible!
