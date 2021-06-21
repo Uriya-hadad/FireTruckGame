@@ -5,9 +5,11 @@ import java.awt.event.ActionListener;
 
 
 public class Game extends JFrame implements ActionListener {
-    LoginScreen firstScreen;
-    ImageIcon icon = new ImageIcon("Pngs/icon.jpg");
-    public Game() {
+    private final LoginScreen firstScreen;
+    private final ImageIcon icon = new ImageIcon("Pngs/icon.jpg");
+    private final String selectedValue;
+    public Game(String selectedValue) {
+        this.selectedValue = selectedValue;
         setTitle("FireTruck Game");
         setIconImage(icon.getImage());
         firstScreen = new LoginScreen();
@@ -18,11 +20,8 @@ public class Game extends JFrame implements ActionListener {
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
-}
-
-    public static void main(String[] args) {
-        new Game();
     }
+
 
     @Override
     public void paint(Graphics g) {
@@ -32,6 +31,14 @@ public class Game extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         remove(firstScreen);
+        firstScreen.getClip().stop();
+        JOptionPane.showMessageDialog(this,
+                """
+                        Hello\040""" + selectedValue + """
+                         we have all been waiting for you!
+                        The city needs a good firefighter
+                         we hope you can help us!
+                        """, "Message from the city",JOptionPane.INFORMATION_MESSAGE);
         MainPanel panel = new MainPanel(firstScreen.isDarkMode());
         add(panel);
         panel.requestFocus();

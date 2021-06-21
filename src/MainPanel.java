@@ -21,16 +21,14 @@ public class MainPanel extends JPanel implements ActionListener {
     private int takeCurrentTime;
     private int timeLeft;
     private boolean exit = false;
-    private final boolean darkMode;
 
-    public MainPanel(boolean darkMode) {
-        this.darkMode = darkMode;
+    public MainPanel( boolean darkMode) {
         setLayout(null);
         timer = new Timer(1000, this);
         timer.start();
         setPreferredSize(new Dimension(DataForGame.FrameWeight,
                 DataForGame.FrameHeight));
-        truck = new FireTruck(this,darkMode);
+        truck = new FireTruck(this, darkMode);
         fire = new Fire();
         add(truck);
         add(fire);
@@ -122,7 +120,7 @@ public class MainPanel extends JPanel implements ActionListener {
             timer.stop();
         } else {
             g.setColor(new Color(49, 127, 49));
-            g.fillRect(0,0,DataForGame.FrameWeight,25);
+            g.fillRect(0, 0, DataForGame.FrameWeight, 25);
             g.setColor(Color.BLACK);
             g.setFont(new Font("MV Boli", Font.BOLD, 17));
             g.drawImage(backgroundImage, 0, 25, DataForGame.FrameWeight, DataForGame.FrameHeight, this);
@@ -138,7 +136,7 @@ public class MainPanel extends JPanel implements ActionListener {
         if (takeCurrentTime == -1)
             takeCurrentTime = time;
         else if (time - takeCurrentTime == 5) {
-            fire.place(truck,this);
+            fire.place(truck, this);
             timeLeft = 10;
         } else if (fire.isVisible())
             timeLeft--;

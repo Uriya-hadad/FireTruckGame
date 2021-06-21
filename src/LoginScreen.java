@@ -6,15 +6,17 @@ import java.io.File;
 import java.io.IOException;
 
 public class LoginScreen extends JPanel {
+    private int lastFrame;
     private Image backgroundImage;
-    private JButton instructions, play, audio, darkMode;
-    private boolean audioOn = true, isDarkMode = false;
+    private JButton instructions, play, audioButton, darkMode;
+    private boolean isAudioOn = true, isDarkMode = false;
     private Icon img;
     private Clip clip;
-    private final String soundName = "audio/sami the fireman song.wav";
+    private final String soundName;
     private AudioInputStream audioInputStream;
 
     public LoginScreen() {
+        soundName = "audio/sami the fireman song.wav";
         panelInit();
         add(instructions);
         add(play);
@@ -35,6 +37,7 @@ public class LoginScreen extends JPanel {
                                            
                 Use the arrow keys to move left right up and down.
                 Use the space bar to spray water and put out the fire."""));
+
     }
 
 
@@ -46,13 +49,9 @@ public class LoginScreen extends JPanel {
         Font playFont = new Font("Ariel", Font.BOLD, 40);
         Font instFont = new Font("Ariel", Font.BOLD, 15);
 
-        audio = new JButton();
-        audio.setBounds(0,80,53,47);
-
         {
             try {
                 backgroundImage = ImageIO.read(new File("Pngs/backGround.jpg"));
-
                 audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
                 clip = AudioSystem.getClip();
                 clip.open(audioInputStream);
@@ -61,7 +60,6 @@ public class LoginScreen extends JPanel {
                 e.printStackTrace();
             }
         }
-
         instructions = new JButton("Instructions");
         instructions.setBounds(0, 0, 125, 30);
         instructions.setFont(instFont);
@@ -86,34 +84,42 @@ public class LoginScreen extends JPanel {
         play.setBackground(Color.RED);
 
         img = new ImageIcon("Pngs/audio on.png");
-        audio = new JButton(img);
-        audio.setBounds(254,0,30,30);
-        add(audio);
-        audio.addActionListener((e) -> {
-            audioOn = !audioOn;
-            if (audioOn){
+        audioButton = new JButton(img);
+        audioButton.setBounds(254,0,30,30);
+        add(audioButton);
+        audioButton.addActionListener((e) -> {
+            isAudioOn = !isAudioOn;
+            if (isAudioOn){
                 img = new ImageIcon("Pngs/audio on.png");
-                audio.setIcon(img);
+                audioButton.setIcon(img);
                 try {
                     audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
                     clip = AudioSystem.getClip();
                     clip.open(audioInputStream);
+                    if (lastFrame !=0){
+                        clip.setFramePosition(lastFrame);
+                    }
                     clip.start();
                 } catch (UnsupportedAudioFileException | LineUnavailableException | IOException unsupportedAudioFileException) {
                     unsupportedAudioFileException.printStackTrace();
                 }
             }else{
                 img = new ImageIcon("Pngs/audio off.png");
-                audio.setIcon(img);
+                audioButton.setIcon(img);
+                lastFrame = clip.getFramePosition();
                 clip.close();
             }
         });
+
     }
 
     public JButton getPlay() {
         return play;
     }
 
+    public Clip getClip() {
+        return clip;
+    }
     public boolean isDarkMode() {
         return isDarkMode;
     }
@@ -122,6 +128,7 @@ public class LoginScreen extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(backgroundImage, 0, 0, DataForGame.FrameWeight, DataForGame.FrameHeight, this);
+
     }
 }
 
