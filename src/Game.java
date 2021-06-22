@@ -6,9 +6,10 @@ import java.awt.event.ActionListener;
 
 public class Game extends JFrame implements ActionListener {
     private final LoginScreen firstScreen;
-    private final ImageIcon icon = new ImageIcon("Pngs/icon.jpg");
     private final String selectedValue;
+
     public Game(String selectedValue) {
+        ImageIcon icon = new ImageIcon("Pngs/icon.jpg");
         this.selectedValue = selectedValue;
         setTitle("FireTruck Game");
         setIconImage(icon.getImage());
@@ -21,7 +22,6 @@ public class Game extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setVisible(true);
     }
-
 
     @Override
     public void paint(Graphics g) {

@@ -25,9 +25,6 @@ public class LoginScreen extends JPanel {
 
     }
 
-
-
-
     public void panelInit() {
 
         setLayout(null);
