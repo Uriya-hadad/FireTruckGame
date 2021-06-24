@@ -117,13 +117,13 @@ public class MainPanel extends JPanel implements ActionListener {
                 (truck.getLocations().intersects(fire.getLocations()) && fire.isVisible())) {
             gameOver(g);
         } else {
-            g.setColor(new Color(49, 127, 49));
-            g.fillRect(0, 0, DataForGame.FrameWeight, 25);
+            g.setColor(DataForGame.gameColor);
+            g.fillRect(DataForGame.GameFillRect_X, DataForGame.GameFillRect_Y, DataForGame.GameFillRectWeight, DataForGame.GameFillRectHeight);
             g.setColor(Color.BLACK);
-            g.setFont(new Font("MV Boli", Font.BOLD, 17));
-            g.drawImage(backgroundImage, 0, 25, DataForGame.FrameWeight, DataForGame.FrameHeight, this);
-            g.drawString("Your score is: " + score, DataForGame.FrameWeight / 2, 20);
-            g.drawString("your time left is: " + timeLeft, 10, 20);
+            g.setFont(DataForGame.GameFont);
+            g.drawImage(backgroundImage, DataForGame.gameBackgroundImage_X, DataForGame.gameBackgroundImage_Y, DataForGame.gameBackgroundImageWeight, DataForGame.gameBackgroundImageHeight, this);
+            g.drawString("Your score is: " + score, DataForGame.Game_scoreString_X, DataForGame.Game_scoreString_Y);
+            g.drawString("your time left is: " + timeLeft, DataForGame.timeLeftString_X, DataForGame.timeLeftString_Y);
             truck.paintComponent(g);
         }
     }
@@ -135,16 +135,16 @@ public class MainPanel extends JPanel implements ActionListener {
         exit = true;
         g.clearRect(0, 0, getWidth(), getHeight());
         g.setColor(Color.MAGENTA);
-        g.fillRect(0, 0, DataForGame.FrameWeight, DataForGame.FrameHeight);
-        g.drawImage(cryingFace, (DataForGame.FrameWeight / 2) - 50, 40, 120, 120, this);
-        g.setFont(new Font("arial", Font.BOLD + Font.ITALIC, 65));
+        g.fillRect(DataForGame.GameOverFillRect_X, DataForGame.GameOverFillRect_Y, DataForGame.FrameWeight, DataForGame.FrameHeight);
+        g.drawImage(cryingFace, DataForGame.cryingFace_X, DataForGame.cryingFace_Y, DataForGame.cryingFaceWeight, DataForGame.cryingFaceHeight, this);
+        g.setFont(DataForGame.GameOverFont);
         g.setColor(Color.RED);
-        g.drawString("Game over", 230, (DataForGame.FrameHeight / 2) - 30);
+        g.drawString("Game over", DataForGame.gameOverString_X, DataForGame.gameOverString_Y);
         g.setColor(Color.BLUE);
-        g.setFont(new Font("arial", Font.BOLD, 30));
-        g.drawString("Your score is: " + score, (DataForGame.FrameWeight / 2) - 110, (DataForGame.FrameHeight / 2) + 30);
-        g.setFont(new Font("Ink Free", Font.ITALIC, 25));
-        g.drawString("Did you enjoy the game?  Feel free to play again!", 150, (DataForGame.FrameHeight / 2) + 130);
+        g.setFont(DataForGame.GameOver_scoreFont);
+        g.drawString("Your score is: " + score, DataForGame.GameOver_scoreString_X, DataForGame.GameOver_scoreString_Y);
+        g.setFont(DataForGame.GameOver_enjoyGameFont);
+        g.drawString("Did you enjoy the game?  Feel free to play again!", DataForGame.GameOver_enjoyGameString_X, DataForGame.GameOver_enjoyGameString_Y);
         timer.stop();
         add(restartGame);
         restartGame.addActionListener(e -> {

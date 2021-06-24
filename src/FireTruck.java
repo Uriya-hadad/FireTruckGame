@@ -8,8 +8,8 @@ public class FireTruck extends Component {
     private final File fileUp, fileDown, fileLeft, fileRight;
     private int position = 1;
     private Image image;
-    private int X_POSITION = DataForGame.FrameWeight / 2;
-    private int Y_POSITION = DataForGame.FrameHeight / 2;
+    private int X_POSITION = DataForGame.FireTruck_X_position;
+    private int Y_POSITION = DataForGame.FireTruck_Y_position;
     private final Rectangle location;
 
 
@@ -56,7 +56,7 @@ public class FireTruck extends Component {
 
     public void paintComponent(Graphics g) {
         g.drawImage(image, X_POSITION, Y_POSITION, this);
-        location.setBounds(X_POSITION, Y_POSITION, 57, 57);
+        location.setBounds(X_POSITION, Y_POSITION, DataForGame.FireLocationWeight, DataForGame.FireLocationHeight);
     }
 
     public void moveUp() {

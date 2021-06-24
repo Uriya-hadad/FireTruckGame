@@ -17,10 +17,10 @@ public class Fire extends JLabel {
 
     void place(FireTruck truck,MainPanel parent) {
         Random random = new Random();
-        int x_position = random.nextInt(DataForGame.FrameWeight - 60);
-        int y_position = random.nextInt(DataForGame.FrameHeight - 80) + 20;
-        setBounds(x_position, y_position, 60, 60);
-        location.setBounds(x_position + 10, y_position + 10, 40, 50);
+        int x_position = random.nextInt(DataForGame.Fire_X_position);
+        int y_position = random.nextInt(DataForGame.Fire_Y_position) + 20;
+        setBounds(x_position, y_position, DataForGame.FireBoundsWidth, DataForGame.FireBoundsHeight);
+        location.setBounds(x_position + 10, y_position + 10, DataForGame.locationBoundsWidth, DataForGame.locationBoundsHeight);
         if (location.intersects(truck.getLocations())) {
             place(truck,parent);
         }

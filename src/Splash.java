@@ -19,22 +19,22 @@ public class Splash extends JLabel {
         switch (positionTruck) {
             case 1 -> {
                 setIcon(upIcon);
-                setBounds(xTruck, yTruck - DataForGame.SplashSize, 57, 57);
+                setBounds(xTruck, yTruck - DataForGame.SplashSize, DataForGame.SplashWidth, DataForGame.SplashHeight);
                 location.setBounds(xTruck +17, yTruck - DataForGame.SplashSize, 25, 25);
             }
             case 2 -> {
                 setIcon(rightIcon);
-                setBounds(xTruck + DataForGame.SplashSize, yTruck, 57, 57);
+                setBounds(xTruck + DataForGame.SplashSize, yTruck, DataForGame.SplashWidth, DataForGame.SplashHeight);
                 location.setBounds(xTruck + DataForGame.SplashSize+30, yTruck +37, 28, 20);
             }
             case 3 -> {
                 setIcon(downIcon);
-                setBounds(xTruck, yTruck + DataForGame.SplashSize, 57, 57);
+                setBounds(xTruck, yTruck + DataForGame.SplashSize, DataForGame.SplashWidth, DataForGame.SplashHeight);
                 location.setBounds(xTruck +10, yTruck +35 + DataForGame.SplashSize, 25, 25);
             }
             case 4 -> {
                 setIcon(leftIcon);
-                setBounds(xTruck - DataForGame.SplashSize, yTruck, 57, 57);
+                setBounds(xTruck - DataForGame.SplashSize, yTruck, DataForGame.SplashWidth, DataForGame.SplashHeight);
                 location.setBounds(xTruck - DataForGame.SplashSize, yTruck +30, 28, 25);
             }
         }

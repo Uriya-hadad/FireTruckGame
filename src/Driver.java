@@ -21,13 +21,13 @@ public class Driver {
         JButton create = new JButton("Create new user");
         userArrayList = new ArrayList<>();
         userList = new JList<>();
-        userList.setPreferredSize(new Dimension(380, 220));
+        userList.setPreferredSize(new Dimension(DataForGame.userListWidth, DataForGame.userListHeight));
         usersFile = new File("files/users.txt");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.getContentPane().setLayout(new FlowLayout());
         frame.setIconImage(new ImageIcon("Pngs/icon.jpg").getImage());
-        frame.setSize(400, 300);
+        frame.setSize(DataForGame.DriverFrameWidth, DataForGame.DriverFrameHeight);
         frame.setLocationRelativeTo(null);
         getNamesFromFile();
         String[] userNamesList = userArrayList.toArray(new String[]{});

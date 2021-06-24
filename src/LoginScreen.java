@@ -30,8 +30,8 @@ public class LoginScreen extends JPanel {
         setLayout(null);
         setPreferredSize(new Dimension(DataForGame.FrameWeight,
                 DataForGame.FrameHeight));
-        Font playFont = new Font("Ariel", Font.BOLD, 40);
-        Font instFont = new Font("Ariel", Font.BOLD, 15);
+        Font playFont = new Font("Ariel", Font.BOLD, DataForGame.playFontSize);
+        Font instFont = new Font("Ariel", Font.BOLD, DataForGame.instFontSize);
 
         {
             try {
@@ -45,15 +45,15 @@ public class LoginScreen extends JPanel {
             }
         }
         instructions = new JButton("Instructions");
-        instructions.setBounds(0, 0, 125, 30);
+        instructions.setBounds(DataForGame.instructions_X, DataForGame.instructions_Y, DataForGame.instructionsWeight, DataForGame.instructionsHeight);
         instructions.setFont(instFont);
         instructions.setBackground(Color.CYAN);
 
         darkMode = new JButton("Night Time Off");
-        darkMode.setBounds(127, 0, 125, 30);
+        darkMode.setBounds(DataForGame.darkMode_X, DataForGame.darkMode_Y, DataForGame.darkModeWeight, DataForGame.darkModeHeight);
         darkMode.addActionListener(e -> {
             if (!isDarkMode) {
-                darkMode.setBackground(new Color(161, 44, 118));
+                darkMode.setBackground(DataForGame.darkModeColor);
                 darkMode.setText("Night Time On");
             } else {
                 darkMode.setBackground(null);
@@ -64,12 +64,12 @@ public class LoginScreen extends JPanel {
         play = new JButton("Play");
         play.setForeground(Color.WHITE);
         play.setFont(playFont);
-        play.setBounds((DataForGame.FrameWeight - 110) / 2, (DataForGame.FrameHeight / 6) * 4, 120, 70);
+        play.setBounds(DataForGame.play_X, DataForGame.play_Y, DataForGame.playWeight, DataForGame.playHeight);
         play.setBackground(Color.RED);
 
         img = new ImageIcon("Pngs/audio on.png");
         audioButton = new JButton(img);
-        audioButton.setBounds(254,0,30,30);
+        audioButton.setBounds(DataForGame.audioButton_X,DataForGame.audioButton_Y,DataForGame.audioButtonWeight,DataForGame.audioButtonHeight);
         add(audioButton);
         audioButton.addActionListener((e) -> {
             isAudioOn = !isAudioOn;
@@ -111,7 +111,7 @@ public class LoginScreen extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(backgroundImage, 0, 0, DataForGame.FrameWeight, DataForGame.FrameHeight, this);
+        g.drawImage(backgroundImage, DataForGame.backgroundImage_X, DataForGame.backgroundImage_Y, DataForGame.FrameWeight, DataForGame.FrameHeight, this);
 
     }
     static public void showInstruction() {

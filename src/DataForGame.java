@@ -1,10 +1,76 @@
+import java.awt.*;
+
 public class DataForGame {
     public static final int FrameWeight = 800;
     public static final int FrameHeight = 500;
     public static final int ImageSize = 57;
     public static final int SplashSize = 60;
+    public static final int SplashWidth = 57;
+    public static final int SplashHeight = 57;
     public static final String failMessage = "Oh no I am missing Check file, please help me find it!";
-
-
+    public static final int userListWidth = 380;
+    public static final int userListHeight = 220;
+    public static final int DriverFrameWidth = 400;
+    public static final int DriverFrameHeight = 300;
+    public static final int Fire_X_position = FrameWeight - 60;
+    public static final int Fire_Y_position = FrameHeight - 80;
+    public static final int FireBoundsWidth = 60;
+    public static final int FireBoundsHeight = 60;
+    public static final int locationBoundsWidth = 40;
+    public static final int locationBoundsHeight = 50;
+    public static final int FireTruck_X_position = FrameWeight / 2;
+    public static final int FireTruck_Y_position = FrameHeight / 2;
+    public static final int FireLocationWeight = 57;
+    public static final int FireLocationHeight = 57;
+    public static final int playFontSize = 40;
+    public static final int instFontSize = 15;
+    public static final int instructions_X = 0;
+    public static final int instructions_Y = 0;
+    public static final int instructionsWeight = 125;
+    public static final int instructionsHeight = 30;
+    public static final int darkModeWeight = 125;
+    public static final int darkModeHeight = 30;
+    public static final int darkMode_X = 127;
+    public static final int darkMode_Y = 0;
+    public static final Color darkModeColor = new Color(161, 44, 118);
+    public static final int play_X = (FrameWeight - 110) / 2;
+    public static final int play_Y = (FrameHeight / 6) * 4;
+    public static final int playWeight = 120;
+    public static final int playHeight = 70;
+    public static final int audioButton_X = 254;
+    public static final int audioButton_Y = 0;
+    public static final int audioButtonWeight = 30;
+    public static final int audioButtonHeight = 30;
+    public static final int backgroundImage_X = 0;
+    public static final int backgroundImage_Y = 0;
+    public static final int cryingFace_X = (FrameWeight / 2) - 50;
+    public static final int cryingFace_Y = 40;
+    public static final int cryingFaceWeight = 120;
+    public static final int cryingFaceHeight = 120;
+    public static final int gameOverString_X = 230;
+    public static final int gameOverString_Y = (FrameHeight / 2) - 30;
+    public static final Font GameOverFont = new Font("arial", Font.BOLD + Font.ITALIC, 65);
+    public static final int GameOver_scoreString_X = (FrameWeight / 2) - 110;
+    public static final int GameOver_scoreString_Y = (FrameHeight / 2) + 30;
+    public static final Font GameOver_scoreFont = new Font("arial", Font.BOLD, 30);
+    public static final int GameOver_enjoyGameString_X = 150;
+    public static final int GameOver_enjoyGameString_Y = (FrameHeight / 2) + 130;
+    public static final Font GameOver_enjoyGameFont = new Font("Ink Free", Font.ITALIC, 25);
+    public static final int GameOverFillRect_X = 0;
+    public static final int GameOverFillRect_Y = 0;
+    public static final int GameFillRect_X = 0;
+    public static final int GameFillRect_Y = 0;
+    public static final int GameFillRectWeight = FrameWeight;
+    public static final int GameFillRectHeight = 25;
+    public static final int Game_scoreString_X = FrameWeight / 2;
+    public static final int Game_scoreString_Y = 20;
+    public static final Font GameFont = new Font("MV Boli", Font.BOLD, 17);
+    public static final int timeLeftString_X = 10;
+    public static final int timeLeftString_Y = 20;
+    public static final Color gameColor = new Color(49, 127, 49);
+    public static final int gameBackgroundImage_X= 0;
+    public static final int gameBackgroundImage_Y= 25;
+    public static final int gameBackgroundImageWeight= FrameWeight;
+    public static final int gameBackgroundImageHeight= FrameHeight;
 
 }
