@@ -154,6 +154,7 @@ public class MainPanel extends JPanel implements ActionListener {
             remove(restartGame);
             repaint();
             startGame();
+            score = 0;
         });
     }
 
