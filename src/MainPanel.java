@@ -132,6 +132,7 @@ public class MainPanel extends JPanel implements ActionListener {
         repaint();
         remove(truck);
         remove(fire);
+        canSpray = false;
         exit = true;
         g.clearRect(0, 0, getWidth(), getHeight());
         g.setColor(Color.MAGENTA);
@@ -155,6 +156,7 @@ public class MainPanel extends JPanel implements ActionListener {
             repaint();
             startGame();
             score = 0;
+            canSpray = true;
         });
     }
 
